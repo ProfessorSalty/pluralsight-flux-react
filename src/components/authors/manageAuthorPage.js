@@ -42,7 +42,7 @@ class ManageAuthorPage extends Component {
         this.setState({
             author: this.state.author,
             dirty: true
-        });   
+        });
     };//Semicolon required >:( because it's a class property...
 
 
@@ -54,8 +54,6 @@ class ManageAuthorPage extends Component {
             this.setState({dirty: false});
             this.context.router.transitionTo('authors');
         }
-
-        
     };
 
     authorFormIsValid() {
@@ -66,11 +64,11 @@ class ManageAuthorPage extends Component {
                             };
 
         if(this.state.author.firstName.length === 0) {
-            this.state.errors.firstName = "Must have first name"
+            this.state.errors.firstName = "Must have first name";
             formIsValid = false;
         }
         if(this.state.author.lastName.length === 0) {
-            this.state.errors.lastName = "Must have last name"
+            this.state.errors.lastName = "Must have last name";
             formIsValid = false;
         }
 

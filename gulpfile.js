@@ -5,7 +5,8 @@ const gulp = require('gulp'),
       babelify = require('babelify'),
       source = require('vinyl-source-stream'), //Use conventional text streams with Gulp
       concat = require('gulp-concat'),
-      lint = require('gulp-eslint');
+      lint = require('gulp-eslint')
+      friendlyFormatter = require('eslint-friendly-formatter'); //export EFF_NO_GRAY=true in console if you can't see the output
 
 const config = {
     port: 9000,
@@ -78,7 +79,7 @@ gulp.task('css', () => {
 gulp.task('lint', () => {
     return gulp.src(config.paths.js)
                 .pipe(lint({config: 'eslint.config.json'}))
-                .pipe(lint.format());
+                .pipe(lint.format(friendlyFormatter));
 });
 
 gulp.task('watch', () => {
