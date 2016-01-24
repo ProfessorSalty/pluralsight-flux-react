@@ -11,14 +11,10 @@ class TextInput extends Component {
         error: PropTypes.string,
         af: PropTypes.bool
     };
-<<<<<<< HEAD
 
     constructor(props) {
         super(props);
     }
-
-=======
->>>>>>> master
     
     render() {
 

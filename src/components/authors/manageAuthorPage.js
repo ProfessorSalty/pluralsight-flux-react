@@ -6,9 +6,14 @@ import AuthorApi from '../../api/authorApi';
 import toastr from 'toastr';
 
 class ManageAuthorPage extends Component {
-    //We don't get mixins in es6!
-    constructor(props) {
-        super(props); //It's very important to pass context to super() so that the router will work
+    //We don't get mixins in es6!  Pull in the contextTypes static
+    //to get access to the router
+    static contextTypes = {
+        router: React.PropTypes.func.isRequired
+    };
+
+    constructor(props, context) {
+        super(props, context); //It's very important to pass context to super() so that the router will work
         this.state = {
             author: {
                 id: '',
@@ -24,11 +29,11 @@ class ManageAuthorPage extends Component {
     }
 
 
-    // static willTransitionFrom(transition, component) {
-    //     if(component.state.dirty && !confirm('Leave without saving?')) {
-    //         transition.abort();
-    //     }
-    // }
+    static willTransitionFrom(transition, component) {
+        if(component.state.dirty && !confirm('Leave without saving?')) {
+            transition.abort();
+        }
+    }
 
     setAuthorState = (event) => { //Use arrow functions to maintain correct binding of 'this'
         let field = event.target.name,
@@ -43,12 +48,11 @@ class ManageAuthorPage extends Component {
 
     saveAuthor = (event) => {
         event.preventDefault();
-
         if(this.authorFormIsValid()) {
             AuthorApi.saveAuthor(this.state.author);
             toastr.success('Author saved');
             this.setState({dirty: false});
-            // this.context.router.transitionTo('authors');
+            this.context.router.transitionTo('authors');
         }
 
         
@@ -74,15 +78,15 @@ class ManageAuthorPage extends Component {
         return formIsValid;
     }
 
-    // componentWillMount() {
-    //     let authorId = this.props.params.id;
+    componentWillMount() {
+        let authorId = this.props.params.id;
 
-    //     if(authorId) {
-    //         this.setState({
-    //             author: AuthorApi.getAuthorById(authorId)
-    //         });
-    //     }
-    // }
+        if(authorId) {
+            this.setState({
+                author: AuthorApi.getAuthorById(authorId)
+            });
+        }
+    }
 
     render() {
         return (

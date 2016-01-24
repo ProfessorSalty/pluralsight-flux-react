@@ -5,8 +5,7 @@ const gulp = require('gulp'),
       babelify = require('babelify'),
       source = require('vinyl-source-stream'), //Use conventional text streams with Gulp
       concat = require('gulp-concat'),
-      lint = require('gulp-eslint'),
-      sourcemaps = require('gulp-sourcemaps');
+      lint = require('gulp-eslint');
 
 const config = {
     port: 9000,
@@ -20,7 +19,7 @@ const config = {
             'node_modules/toastr/toastr.css'
         ],
         dist: './dist',
-        images: './src/images/**',
+        images: './src/images/*',
         mainJs: './src/main.js'
     }
 };

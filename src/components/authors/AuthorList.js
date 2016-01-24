@@ -9,19 +9,12 @@ class AuthorList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            authors: []
-        };
     }
 
-
-    componentWillReceiveProps(nextProps) {
-        let newAuthors = nextProps.authors.map((author) => {
-            return (<AuthorRow author={author} />);
-        });
-        this.setState({
-            authors: newAuthors
-        });
+    createAuthorRow(author) {
+        return (
+            <AuthorRow author={author} />
+        );
     }
 
     render() {
@@ -32,7 +25,7 @@ class AuthorList extends Component {
                     <th>Name</th>
                 </thead>
                 <tbody>
-                    {this.state.authors}
+                    {this.props.authors.map(this.createAuthorRow)}
                 </tbody>
             </table>
         );
