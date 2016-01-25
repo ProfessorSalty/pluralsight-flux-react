@@ -1,19 +1,26 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'; 
 import AuthorList from './AuthorList';
-let AuthorApi = require('../../api/authorApi');
+import AuthorStore from '../../stores/authorStore';
+import AuthorActions from '../../actions/authorActions';
 
 class AuthorPage extends Component {
 
     constructor() {
         super();
-        this.state = {authors: []};
+        this.state = {authors: AuthorStore.getAllAuthors()};
     }
 
-    componentDidMount() {
-        this.setState({
-            authors: AuthorApi.getAllAuthors()
-        });
+    _onChange() {
+        this.setState({authors: AuthorStore.getAllAuthors()});
+    }
+
+    componentWillMount() {
+        AuthorStore.addChangeListener(this._onChange.bind(this));
+    }
+
+    componentWillUnmount() {
+        AuthorStore.removeChangeListener(this._onChange.bind(this));
     }
 
     render() {

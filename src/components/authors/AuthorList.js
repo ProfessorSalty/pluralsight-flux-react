@@ -21,6 +21,7 @@ class AuthorList extends Component {
         return (
             <table className="table">
                 <thead>
+                    <th></th>
                     <th>ID</th>
                     <th>Name</th>
                 </thead>

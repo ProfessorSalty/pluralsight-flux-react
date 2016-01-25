@@ -2,8 +2,9 @@ import $ from 'jquery';
 import React, {Component} from 'react';
 import {Navigation} from 'react-router';
 import AuthorForm from './authorForm';
-import AuthorApi from '../../api/authorApi';
 import toastr from 'toastr';
+import AuthorStore from '../../stores/authorStore';
+import AuthorActions from '../../actions/authorActions';
 
 class ManageAuthorPage extends Component {
     //We don't get mixins in es6!  Pull in the contextTypes static
@@ -35,7 +36,7 @@ class ManageAuthorPage extends Component {
         }
     }
 
-    setAuthorState = (event) => { //Use arrow functions to maintain correct binding of 'this'
+    setAuthorState = (event) => { //Use arrow functions on callbacks to maintain correct binding of 'this'
         let field = event.target.name,
             value = event.target.value;
         this.state.author[field] = value;
@@ -49,7 +50,11 @@ class ManageAuthorPage extends Component {
     saveAuthor = (event) => {
         event.preventDefault();
         if(this.authorFormIsValid()) {
-            AuthorApi.saveAuthor(this.state.author);
+            if(this.state.author.id) {
+                AuthorActions.updateAuthor(this.state.author);
+            } else {
+                AuthorActions.createAuthor(this.state.author);
+            }
             toastr.success('Author saved');
             this.setState({dirty: false});
             this.context.router.transitionTo('authors');
@@ -81,7 +86,7 @@ class ManageAuthorPage extends Component {
 
         if(authorId) {
             this.setState({
-                author: AuthorApi.getAuthorById(authorId)
+                author: AuthorStore.getAuthorById(authorId)
             });
         }
     }
