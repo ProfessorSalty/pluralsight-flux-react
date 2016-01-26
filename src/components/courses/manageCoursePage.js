@@ -70,6 +70,9 @@ class ManageCoursePage extends Component {
     } else if(course.length.length === 0) {
       this.state.errors.length = "Must have a length";
       formIsValid = false;
+    } else if(course.watchHref.length === 0) {
+      this.state.errors.length = "Must have a link";
+      formIsValid = false;
     }
     this.setState({
       errors: this.state.errors

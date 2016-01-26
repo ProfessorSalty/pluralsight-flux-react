@@ -50,6 +50,14 @@ class CourseForms extends Component {
                         placeholder="Course Length"
                         error={this.props.errors.length}
                     />
+                <TextInput
+                        name="watchHref"
+                        label="Video Link"
+                        value={this.props.course.watchHref}
+                        onChange={this.props.onChange}
+                        placeholder="http://some.video.link"
+                        error={this.props.errors.watchHref}
+                    />
                 <input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave}/>
             </form>
         );
