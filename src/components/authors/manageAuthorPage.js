@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React, {Component} from 'react';
 import {Navigation} from 'react-router';
 import AuthorForm from './authorForm';
@@ -63,10 +62,6 @@ class ManageAuthorPage extends Component {
 
     authorFormIsValid() {
         let formIsValid = true;
-        this.state.errors = {
-                                firstName: '',
-                                lastName: ''
-                            };
 
         if(this.state.author.firstName.length === 0) {
             this.state.errors.firstName = "Must have first name";

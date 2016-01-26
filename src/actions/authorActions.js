@@ -5,7 +5,7 @@ let AuthorApi = require('../api/authorApi');
 
 //Action creator
 const AuthorActions = {
-    createAuthor: function(author) {
+    createAuthor: (author) => {
         let newAuthor = AuthorApi.saveAuthor(author);
 
         //Action
@@ -15,7 +15,7 @@ const AuthorActions = {
         });
     },
 
-    updateAuthor: function(author) {
+    updateAuthor: (author) => {
         let newAuthor = AuthorApi.saveAuthor(author);
 
         Dispatcher.dispatch({
@@ -24,7 +24,7 @@ const AuthorActions = {
         });
     },
 
-    deleteAuthor: function(id) {
+    deleteAuthor: (id) => {
         AuthorApi.deleteAuthor(id);
 
         Dispatcher.dispatch({

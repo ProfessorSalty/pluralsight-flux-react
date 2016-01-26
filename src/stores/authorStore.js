@@ -2,6 +2,7 @@ import Dispatcher from '../dispatcher/appDispatcher';
 import ActionTypes from '../constants/actionTypes';
 import {EventEmitter} from 'events';
 import _ from 'lodash';
+
 const CHANGE_EVENT = 'change';
 
 let _authors = [];
